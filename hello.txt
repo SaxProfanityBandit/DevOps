@@ -1,3 +1,4 @@
 This is a test file for version control.
 Hello World. 
 We changed the line endings.
+I added this line in VIM to make sure I can version control from the terminal.
