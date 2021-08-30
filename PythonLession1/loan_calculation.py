@@ -1,4 +1,4 @@
-#User Input
+#User Input - Adding this to try SSH auth for git.
 salary = int(input("Enter gross salary: "))
 taxrate = int(input("Enter your taxrate in percentages: "))
 rent = int(input("Enter your monthly rent: "))
