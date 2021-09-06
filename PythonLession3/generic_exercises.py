@@ -14,10 +14,16 @@ def is_even(x):
 def is_int(x):
 	if type(x) is int:
 		return True
+	elif type(x) is float:
+		if int(x) % x == 0:
+			print("Det är ett jämntal utan decimaler sparat i float")
+			return True
+		else:
+			print("Det är en float med decimaler.")
+			return False
 	else:
 		return False
-
-#print(is_int(10.3))
+print(is_int(10.3))
 
 def hotel_cost(nights):
 	return 1200 * nights
@@ -45,6 +51,6 @@ def rental_bike_cost(days):
 def trip_cost(city, days, spending_money):
 	return rental_bike_cost(days) + hotel_cost(days - 1) + plane_ride_cost(city) + spending_money
 
-print("1. Trip: Barcelona: {} kr".format(trip_cost("Barcelona", 5, 600)))
-print("2. Trip: Paris: {} kr".format(trip_cost("Paris", 14, 2000)))
-print("3. Trip: London: {} kr".format(trip_cost("London", 10, 3000)))
+#print("1. Trip: Barcelona: {} kr".format(trip_cost("Barcelona", 5, 600)))
+#print("2. Trip: Paris: {} kr".format(trip_cost("Paris", 14, 2000)))
+#print("3. Trip: London: {} kr".format(trip_cost("London", 10, 3000)))
