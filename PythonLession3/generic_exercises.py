@@ -15,7 +15,8 @@ def is_int(x):
 	if type(x) is int:
 		return True
 	elif type(x) is float:
-		if int(x) % x == 0:
+		#if int(x) % x == 0: Bad way to do this.
+		if int(x) == x:
 			print("Det är ett jämntal utan decimaler sparat i float")
 			return True
 		else:
