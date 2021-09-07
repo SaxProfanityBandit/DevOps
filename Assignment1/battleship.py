@@ -2,9 +2,6 @@
 import os
 import random as ran
 
-#Constants
-
-
 #Functions
 
 def create_matrix(max_x, max_y):
@@ -16,7 +13,6 @@ def create_matrix(max_x, max_y):
 	return matrix
 
 def print_board(board_in):
-	#os.system("clear")
 	i = 0
 	j = 0
 	for x in board_in:
@@ -34,10 +30,6 @@ def print_board(board_in):
 		print()
 		i += 1
 	return None
-
-
-#print_board(create_matrix(5, 5))
-
 
 #Why are these needed?
 def random_row(board_in):
@@ -64,11 +56,9 @@ def game(players):
 	guesses = 5
 	for player in range(players):
 		player_list.append(guesses)
-	print(player_list)
 	player = 1
 	#User input and game logic
 	while player-1 < len(player_list):
-		print(player)
 		while player_list[player-1] > 0:
 			guess_row = input("Player {}: Guess row: ".format(player))
 			guess_column = input("Player {}: Guess column: ".format(player))
@@ -84,10 +74,10 @@ def game(players):
 			guess_column = int(guess_column) - 1
 			
 			#Checking if they are outside the board/list indexes.
-			while guess_row > len(board) or guess_row+1 <= 0:
+			while guess_row > len(board)-1 or guess_row+1 <= 0:
 				print("Player {}: Outside of bounds, try again!".format(player))	
 				guess_row = int(input("Guess row: ")) - 1
-			while guess_column > len(board[guess_row]) or guess_column+1 <= 0:
+			while guess_column > len(board[guess_row])-1 or guess_column+1 <= 0:
 				print("Player {}: Outside of bounds, try again!".format(player))
 				guess_column = int(input("Guess column: ")) - 1
 			#If they guess correctly they win.
@@ -106,12 +96,16 @@ def game(players):
 				player = 1
 			else:
 				player += 1
-			print("Current Player: {}".format(player))
 		if player_list[player-1] == 0:
 			print("Player {}: Game over! No more guesses".format(player))
 			print_board(board)
 			return False
 		player = 1
 
-
-game(int(input("How many players(1/2)? ")))
+#Creating a game session.
+players = input("How many players? ")
+while len(players) == 0:
+	print("You didn't input a number of players. Try again")
+	players = input("How many players? ")
+	
+game(int(players))
