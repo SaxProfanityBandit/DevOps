@@ -58,15 +58,31 @@ def game(players):
 	ship_row = random_row(board)
 	ship_col = random_col(board[ship_row])
 	board[ship_row][ship_col] = "S"
-	#Debug
-	#print_board(board)
+	
+	#Defining players
+	player_list = list()
 	guesses = 5
-	
+	for player in range(players):
+		player_list.append(guesses)
+	print(player_list)
 	#User Input
-	while guesses > 0:
-		guess_row = int(input("Guess row: "))-1
-		guess_column = int(input("Guess column: "))-1
-	
+	while:
+		guess_row = input("Guess row: ")
+		guess_column = input("Guess column: ")
+		
+		#Sanity checking
+		if len(guess_row) == 0:
+			print("You didn't enter a number in the row guess!")
+			guess_row = input("Guess row: ")
+		elif len(guess_column) == 0:
+			print("You didn't enter a number in the column guess!")
+			guess_column = input("Guess column: ")
+		else:
+			print("Good luck!")
+		
+		guess_row = int(guess_row) - 1
+		guess_column = int(guess_column) - 1
+
 		if guess_row > len(board):
 			print("Outside of bounds, try again!")
 		elif guess_column > len(board[guess_row]):
