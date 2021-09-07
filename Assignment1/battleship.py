@@ -95,17 +95,22 @@ def game(players):
 				print_board(board)
 				return True
 			else:
-				player_list[player] -= 1
+				player_list[player-1] -= 1
 				if board[guess_row][guess_column] == "X":
 					print("You've already guessed that!")
 				else:
 					board[guess_row][guess_column] = "X"
-				print("Player {}: Sorry, you missed! Try again! You have {} guesses left.".format(player, player_list[player]))
-		if player_list[player] == 0:
+				print("Player {}: Sorry, you missed! Try again! You have {} guesses left.".format(player, player_list[player-1]))
+			if player >= len(player_list):
+				player = 1
+			else:
+				player += 1
+			print("Current Player: {}".format(player))
+		if player_list[player-1] == 0:
 			print("Player {}: Game over! No more guesses".format(player))
 			print_board(board)
 			return False
-		player += 1
+		player = 1
 
 
 game(int(input("How many players(1/2)? ")))
