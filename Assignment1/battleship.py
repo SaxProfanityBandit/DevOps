@@ -66,7 +66,7 @@ def game(players):
 		player_list.append(guesses)
 	print(player_list)
 	player = 1
-	#User Input
+	#User input and game logic
 	while player-1 < len(player_list):
 		print(player)
 		while player_list[player-1] > 0:
@@ -74,23 +74,24 @@ def game(players):
 			guess_column = input("Player {}: Guess column: ".format(player))
 			
 			#Sanity checking
-			if len(guess_row) == 0:
-				print("You didn't enter a number in the row guess!")
-				guess_row = input("Guess row: ")
-			elif len(guess_column) == 0:
-				print("You didn't enter a number in the column guess!")
-				guess_column = input("Guess column: ")
-			else:
-				print()
-			
+			while len(guess_row) == 0:
+				print("Player {}: You didn't enter a number in the row guess!".format(player))
+				guess_row = input("Player {}: Guess row: ".format(player))
+			while len(guess_column) == 0:
+				print("Player {}: You didn't enter a number in the column guess!".format(player))
+				guess_column = input("Player {}: Guess column: ".format(player))
 			guess_row = int(guess_row) - 1
 			guess_column = int(guess_column) - 1
-
-			if guess_row > len(board):
+			
+			#Checking if they are outside the board/list indexes.
+			while guess_row > len(board) or guess_row+1 <= 0:
+				print("Player {}: Outside of bounds, try again!".format(player))	
+				guess_row = int(input("Guess row: ")) - 1
+			while guess_column > len(board[guess_row]) or guess_column+1 <= 0:
 				print("Player {}: Outside of bounds, try again!".format(player))
-			elif guess_column > len(board[guess_row]):
-				print("Player {}: Outside of bounds, try again!".format(player))
-			elif board[guess_row][guess_column] == "S":
+				guess_column = int(input("Guess column: ")) - 1
+			#If they guess correctly they win.
+			if board[guess_row][guess_column] == "S":
 				print("Player {}: Congratulations, you sank the ship!".format(player))
 				print_board(board)
 				return True
