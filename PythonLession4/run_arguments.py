@@ -11,15 +11,15 @@ def print_args(*args):
 	for argument in args:
 		print(argument)
 
-path = arguments[0]
+path_to = arguments[0]
 file_to_find = arguments[1]
 
 #os.system('ls {}'.format(path))
 
-if os.path.isfile("{}/{}".format(path, file_to_find)) == True:
-	print("File found!")
-	print(os.path.isfile("{}/{}".format(path, file_to_find)))
-	print("{}/{}".format(path, file_to_find))
-else:
-	print("Couldn't find file.")
 
+def find(path, filename):
+	for root, dirs, files in os.walk(path):
+		if filename in files:
+			return os.path.join(root, filename)
+
+print(find(path_to, file_to_find))
