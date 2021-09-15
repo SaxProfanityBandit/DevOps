@@ -1,7 +1,7 @@
 #Imports
 import os
 import random as ran
-
+import copy as c
 #Functions
 
 def create_matrix(max_x, max_y):
@@ -49,11 +49,12 @@ def game(players):
 	print_board(board)
 	ship_row = random_row(board)
 	ship_col = random_col(board[ship_row])
-	board_copy = board
+	
+	#Creating a copy of the board to show the player without revealing the ship.
+	board_copy = c.deepcopy(board)
+	#Marking the ship tile.
 	board[ship_row][ship_col] = "S"
 
-	#Creating a copy of the board to show the player without revealing the ship.
-	board_copy[ship_row][ship_col] = "O"
 
 	#Defining players
 	player_list = list()
@@ -95,7 +96,7 @@ def game(players):
 					print("You've already guessed that!")
 				else:
 					board[guess_row][guess_column] = "X"
-					board_copy[guess_row][guess_column]
+					board_copy[guess_row][guess_column] = "X"
 					print_board(board_copy)
 				print("Player {}: Sorry, you missed! Try again! You have {} guesses left.".format(player, player_list[player-1]))
 			if player >= len(player_list):
