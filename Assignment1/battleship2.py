@@ -5,9 +5,6 @@ import random as rand
 import os
 import copy as c
 
-
-
-
 """
 Defining the Game class to make it easier to 
 understand the code further in the project
@@ -142,7 +139,6 @@ class Game(object):
     def main(self):
         os.system("clear")
         self.print_board(self.board)
-        print(self.ship_row, self.ship_col)
         self.board[self.ship_row][self.ship_col] = "S"
         if self.game_logic() == True:
             self.print_board(self.board)
