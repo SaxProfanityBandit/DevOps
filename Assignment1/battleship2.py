@@ -4,7 +4,7 @@
 import random as rand
 import os
 import copy as c
-from sys import float_repr_style
+
 
 
 
@@ -94,9 +94,10 @@ class Game(object):
             return False
         else:
             print("Player {} has {} guesses left.".format(self.current_player, self.player_list[self.current_player-1]))
-            
+
             print("Player {}: Guess row: ".format(self.current_player), end="")
             self.guess_row = self.user_input()
+
             print("Player {}: Guess column: ".format(self.current_player), end="")
             self.guess_col = self.user_input()
 
@@ -123,11 +124,20 @@ class Game(object):
                 self.board_visible[self.guess_row-1][self.guess_col-1] = "X"
                 self.player_list[self.current_player-1] -= 1
                 self.print_board(self.board_visible)
-
+                
+                if len(self.player_list) > 1:
+                    self.current_player += 1
+                if self.current_player > len(self.player_list):
+                    self.current_player = 1 
                 return self.game_logic()
             else:
-                print("Player {} has run out of guesses.".format(self.current_player))
-                return False
+                    print("Player {} ran out of guesses!".format(self.current_player))
+                    return False
+
+    """
+    Keeping the main function simple and easy to read by handling game logic
+    above and using return to see the condition of the game.
+    """
 
     def main(self):
         os.system("clear")
@@ -136,12 +146,33 @@ class Game(object):
         self.board[self.ship_row][self.ship_col] = "S"
         if self.game_logic() == True:
             self.print_board(self.board)
-            print("Congratulations! Player {} won the game!".format(self.current_player))
+            print("Congratulations! Player {} sank the ship!".format(self.current_player))
         else:
             print("Game over! Player {} has lost!".format(self.current_player))
 
+"""
+Defining the run function here to easier handle player input.
+Doing it this way avoids using confusing while loops entirely.
+"""
 
+def battleship_run():
+    os.system("clear")
+    print("Please enter how many players are going to play:")
+    players = input("\n")
+    if len(players) > 0:
+        if int(players) < 0:
+            print("You can't have a negative amount of players. Try again.")
+            return battleship_run()
+        else:
+            return int(players)
+    else:
+        print("You didn't type any player amount! Try again.")
+        return battleship_run()
 
+"""
+Here is all that is left outside of functions and the game class. 
+Pretty easy to read if you ask me.
+"""
 
-battleship = Game(1)
+battleship = Game(battleship_run())
 battleship.main()
