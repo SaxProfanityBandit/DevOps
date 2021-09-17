@@ -112,11 +112,8 @@ class Game(object):
 
     def game_logic(self):
         self.player_guesses()
-        print(self.ship_row, self.guess_row)
-        print(self.ship_col, self.guess_col)
         
         #I first did -1 here and spread out in the code. Very bad and confusing.
-
         if self.board[self.guess_row][self.guess_col] == self.board[self.ship_row][self.ship_col]: 
         #if self.guess_row == self.ship_row and self.guess_col == self.ship_col: 
             return True
