@@ -74,7 +74,7 @@ class Game(object):
                 print("That's not even in the ocean! Try again.", end="")
                 return self.user_input()
             else:
-                return int(line)
+                return int(line)-1
         else:
             print("You didn't type anything! Try again", end="")
             return self.user_input()
@@ -98,7 +98,7 @@ class Game(object):
             print("Player {}: Guess column: ".format(self.current_player), end="")
             self.guess_col = self.user_input()
 
-            if self.board[self.guess_row-1][self.guess_col-1] == "X":
+            if self.board[self.guess_row][self.guess_col] == "X":
                 print("You've already guessed on that row! Try again.")
                 return self.player_guesses()
             else:
@@ -112,13 +112,19 @@ class Game(object):
 
     def game_logic(self):
         self.player_guesses()
-        if self.board[self.guess_row-1][self.guess_col-1] == self.board[self.ship_row][self.ship_col]: 
+        print(self.ship_row, self.guess_row)
+        print(self.ship_col, self.guess_col)
+        
+        #I first did -1 here and spread out in the code. Very bad and confusing.
+
+        if self.board[self.guess_row][self.guess_col] == self.board[self.ship_row][self.ship_col]: 
+        #if self.guess_row == self.ship_row and self.guess_col == self.ship_col: 
             return True
         else:
             if self.player_list[self.current_player-1] > 0:
                 print("Sorry, you missed!")
-                self.board[self.guess_row-1][self.guess_col-1] = "X"
-                self.board_visible[self.guess_row-1][self.guess_col-1] = "X"
+                self.board[self.guess_row][self.guess_col] = "X"
+                self.board_visible[self.guess_row][self.guess_col] = "X"
                 self.player_list[self.current_player-1] -= 1
                 self.print_board(self.board_visible)
                 
@@ -141,10 +147,12 @@ class Game(object):
         self.print_board(self.board)
         self.board[self.ship_row][self.ship_col] = "S"
         if self.game_logic() == True:
+            self.board[self.ship_row][self.ship_col] = "S"
             self.print_board(self.board)
             print("Congratulations! Player {} sank the ship!".format(self.current_player))
         else:
             print("Game over! Player {} has lost!".format(self.current_player))
+            self.print_board(self.board)
 
 """
 Defining the run function here to easier handle player input.
