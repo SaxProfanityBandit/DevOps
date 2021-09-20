@@ -145,6 +145,6 @@ savings_account.get_balance(1111)
 fee_savings_account = FeeSavingsAccount(2222, 10000, 0.05, 15)
 fee_savings_account.withdraw(2222, 3000)
 
-rickard = Contact("Rickard Sahlgren", "rsahlgren@gmail.com", 28, "He/Him", "0721-930715", "Tabletop games", "Bergkullevägen 207", 46166, "Trollhättan", "Sweden")
+rickard = Contact("Rickard Sahlgren", "rsahlgren@gmail.com", 28, "He/Him", "0721-******", "Tabletop games", "****************", 46166, "Trollhättan", "Sweden")
 
 rickard.print_info()
