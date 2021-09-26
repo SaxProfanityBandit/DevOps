@@ -9,8 +9,9 @@ if __name__ == "__main__":
     """Using argparse instead of sys.argv"""
     process_name = list()
     parser = argparse.ArgumentParser(description="Find/kill one or several processes by name.")
-    parser.add_argument('-i', '--info', help="Display information about a process rather than killing it.", action="store_true")
-    parser.add_argument('-f', '--force', help="Force kill all processes with the provided name. WARNING: Dangerous", action="store_true")
+    group = parser.add_mutually_exclusive_group()
+    group.add_argument('-i', '--info', help="Display information about a process rather than killing it.", action="store_true")
+    group.add_argument('-f', '--force', help="Force kill all processes with the provided name. WARNING: Dangerous", action="store_true")
     parser.add_argument('processes', nargs=argparse.REMAINDER)
     arguments = parser.parse_args()
     args = ""
@@ -65,7 +66,7 @@ for line in process_raw:
 if len(formated_processes) == 0:
     print("Couldn't find the process you were looking for!")
 elif len(formated_processes) > 1 and arguments.force:
-    print("Killing all proccesses with same name!")
+    print("Killing all proccesses with same name:")
     os.system("killall -I {}".format(formated_processes[0]['path']))
 elif len(formated_processes) > 1 or arguments.info:
     for process in formated_processes:
