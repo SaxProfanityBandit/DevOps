@@ -8,7 +8,7 @@ import argparse
 if __name__ == "__main__":
     """Using argparse instead of sysv"""
     process_name = list()
-    parser = argparse.ArgumentParser(description="Find one or several processes by name.")
+    parser = argparse.ArgumentParser(description="Find/kill one or several processes by name.")
     parser.add_argument('-i', '--info', help="Display information about a process rather than killing it.", action="store_true")
     parser.add_argument('-f', '--force', help="Force kill all processes with the provided name. WARNING: Dangerous", action="store_true")
     parser.add_argument('processes', nargs=argparse.REMAINDER)
