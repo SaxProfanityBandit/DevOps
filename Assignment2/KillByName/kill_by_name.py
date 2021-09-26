@@ -30,9 +30,9 @@ for line in process_raw:
                 'user'    : process[0],
                 'cpu'     : process[2],
                 'mem'     : process[3],
-                'started' : process[4],
-                'elapsed' : process[5],
-                'path'    : process[6]
+                'started' : process[8],
+                'elapsed' : process[9],
+                'path'    : process[10]
             }
         )
 
