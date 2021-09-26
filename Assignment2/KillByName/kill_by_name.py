@@ -1,21 +1,26 @@
 #!/usr/bin/env python3
 
 """Imports"""
-
+#import sys
 import os
-import sys
 import argparse
 
 if __name__ == "__main__":
-    arguments = sys.argv[1:]
+    """Using argparse instead of sysv"""
+    process_name = list()
+    parser = argparse.ArgumentParser(description="Find one or several processes by name.")
+    parser.add_argument('-i', '--info', help="Display information about a process rather than killing it.", action="store_true")
+    parser.add_argument('-f', '--force', help="Force kill all processes with the provided name. WARNING: Dangerous", action="store_true")
+    parser.add_argument('processes', nargs=argparse.REMAINDER)
+    arguments = parser.parse_args()
     args = ""
 
     """Handles multiple arguments for different processes."""
-    if len(arguments) > 1:
-        for argument in arguments:
-            args += " -e " + argument
+    if len(arguments.processes) > 1:
+        for process in arguments.processes:
+            args += " -e " + process
     else:
-        args = arguments[0]
+        args = arguments.processes[0]
 
 """Instead of a loop through the entire process list, I grab what the user is looking for directly."""
 process_raw = os.popen('ps aux | grep {}'.format(args)).read().splitlines()
@@ -50,18 +55,16 @@ for line in process_raw:
 """Kill logic and printing."""
 if len(formated_processes) == 0:
     print("Couldn't find the process you were looking for!")
-
-elif len(formated_processes) > 1 or " -i " in args:
+elif len(formated_processes) > 1 and arguments.force:
+    print("Killing all proccesses with same name!")
+    os.system("killall -I {}".format(formated_processes[0]['path']))
+elif len(formated_processes) > 1 or arguments.info:
     for process in formated_processes:
         print(
         "[{}] {} (User) {}% (CPU) {}% (Mem) {} (Started) {} (Elapsed) {} {}".format(
         process['pid'], process['user'], process['cpu'], process['mem'], process['started'], process['elapsed'], process['path'], process['args']
         )
     )
-
 elif len(formated_processes) == 1:
     os.system("kill {}".format(formated_processes[0]['pid']))
     print("Terminated process with PID: {}".format(formated_processes[0]['pid']))
-    
-    
-    
