@@ -175,5 +175,6 @@ Here is all that is left outside of functions and the game class.
 Pretty easy to read if you ask me.
 """
 
-battleship = Game(battleship_run())
-battleship.main()
+if __name__ == "__main__":
+	battleship = Game(battleship_run())
+	battleship.main()

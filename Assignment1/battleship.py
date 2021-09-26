@@ -45,7 +45,7 @@ def game(players):
 	os.system("clear")	
 	
 	#Session variables
-	board = create_matrix(5, 5)
+	board = create_matrix(15, 15)
 	print_board(board)
 	ship_row = random_row(board)
 	ship_col = random_col(board[ship_row])

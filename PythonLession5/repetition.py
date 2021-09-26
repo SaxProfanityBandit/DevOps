@@ -96,3 +96,8 @@ def remove_duplicates(list_in):
 	return list_out
 
 print(remove_duplicates([1,2,1,2,3,4,5]))
+
+def sum_numbers(number):
+	sum = 0
+	while(numbers > 0):
+		

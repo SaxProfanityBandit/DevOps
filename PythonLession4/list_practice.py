@@ -16,16 +16,23 @@ numbers.pop(1)
 numbers.remove(6)
 #print(numbers)
 
-def find_strings(x):
+def find_strings(x)
+	count = 0
 	for word in x:
-		if word == "fizz":
-			count += 1
+		try:
+			if word == "fizz":
+				count += 1
+		except:
+			print("You tried comparing something that is not a string!")
+			continue
 	return count
 
-#print(find_strings(["fizz", "bar", "foo", "fizz", "hoppsan"]))
+x = [23424123, 54563, 1234, "fizz", 31412, "test"]
+
+print(find_strings(x))
+print(find_strings([134, "fizz", "bar", "foo", "fizz", "hoppsan"]))
 
 def loop_through_string(line):
-	i = 0
 	for letter in line:
 		print(letter)
 
