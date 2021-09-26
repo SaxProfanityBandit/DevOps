@@ -4,6 +4,7 @@
 
 import os
 import sys
+import argparse
 
 if __name__ == "__main__":
     arguments = sys.argv[1:]
@@ -47,17 +48,20 @@ for line in process_raw:
     )
 
 """Kill logic and printing."""
-if len(formated_processes) > 1:
+if len(formated_processes) == 0:
+    print("Couldn't find the process you were looking for!")
+
+elif len(formated_processes) > 1 or " -i " in args:
     for process in formated_processes:
         print(
         "[{}] {} (User) {}% (CPU) {}% (Mem) {} (Started) {} (Elapsed) {} {}".format(
         process['pid'], process['user'], process['cpu'], process['mem'], process['started'], process['elapsed'], process['path'], process['args']
         )
     )
+
 elif len(formated_processes) == 1:
     os.system("kill {}".format(formated_processes[0]['pid']))
     print("Terminated process with PID: {}".format(formated_processes[0]['pid']))
-else:
-    print("Couldn't find the process you were looking for!")
+    
     
     
