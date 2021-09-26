@@ -42,7 +42,7 @@ if len(arguments) > 1:
     for process in formated_processes:
         print(
         "[{}] {} (User) {}% (CPU) {}% (Mem) {} (Started) {} (Elapsed) {}".format(
-        process['pid'], process['user'], process['cpu'], process['mem'], process['started'], process['elapsed'], process['elapsed']
+        process['pid'], process['user'], process['cpu'], process['mem'], process['started'], process['elapsed'], process['path']
         )
     )
 else:
