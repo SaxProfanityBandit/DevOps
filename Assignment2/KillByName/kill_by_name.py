@@ -36,5 +36,16 @@ for line in process_raw:
             }
         )
 
-for dict in formated_processes:
-    print(dict)
+
+"""Kill logic and printing."""
+if len(arguments) > 1:
+    for process in formated_processes:
+        print(
+        "[{}] {} (User) {}% (CPU) {}% (Mem) {} (Started) {} (Elapsed) {}".format(
+        process['pid'], process['user'], process['cpu'], process['mem'], process['started'], process['elapsed'], process['elapsed']
+        )
+    )
+else:
+    #print("pkill {}".format(formated_processes[0]['pid']))
+    os.system("kill {}".format(formated_processes[0]['pid']))
+    print("Process killed!")
