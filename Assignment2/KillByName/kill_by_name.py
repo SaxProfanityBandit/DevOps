@@ -6,7 +6,7 @@ import os
 import argparse
 
 if __name__ == "__main__":
-    """Using argparse instead of sysv"""
+    """Using argparse instead of sys.argv"""
     process_name = list()
     parser = argparse.ArgumentParser(description="Find/kill one or several processes by name.")
     parser.add_argument('-i', '--info', help="Display information about a process rather than killing it.", action="store_true")
@@ -15,7 +15,15 @@ if __name__ == "__main__":
     arguments = parser.parse_args()
     args = ""
 
-    """Handles multiple arguments for different processes."""
+    """Handles multiple arguments for different processes. 
+    To make grep understand we want to look for all of those,
+    I loop through the arguments and format them into one single string
+    called args, and they have then:
+    Example:
+    ./kill_by_name.py nano vim firefox
+    -e nano -e vim -firefox
+    meaning that grep can find them properly as it needs -e for more than one argument.
+    """
     if len(arguments.processes) > 1:
         for process in arguments.processes:
             args += " -e " + process
@@ -30,6 +38,7 @@ formated_processes = list()
 
 for line in process_raw:
 
+    """Ignoring the script itself and the grep running as they will false flag for what we are looking for."""
     if "python3" in line or "/bin/sh" in line or "grep" in line:
         continue
 
