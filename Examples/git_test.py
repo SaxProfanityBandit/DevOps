@@ -1,1 +1,1 @@
-print("This is a git test!")
+test = "This is a github test!"
