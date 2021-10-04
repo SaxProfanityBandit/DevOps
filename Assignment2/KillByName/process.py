@@ -56,9 +56,11 @@ class Process(object):
         return None
     
     def kill(self):
-        if len(self.result) > 0:
+        if len(self.result) == 1:
             os.system("kill -9 {}".format(self.result[0]['pid']))
             print("Terminated process with PID: {}".format(self.result[0]['pid']))
+        elif len(self.result) > 1:
+            return self.display_info()
         else:
             print("Couldn't find the process you were looking for. Shutting down.")
             return None
